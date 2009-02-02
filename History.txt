@@ -1,5 +1,6 @@
 === x.x.x / 2009-xx-xx
 
+* Fixed bug in fql_query when result set is empty [Alan Larkin]
 * Modified fql_query to return results as Hashes as a last resort [Alan Larkin]
 * fixed typo in set app properties parser [Andrew Grim, shane]
 * Removed actor_id param from templatized feed [shane]
