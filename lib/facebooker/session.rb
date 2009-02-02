@@ -166,20 +166,23 @@ module Facebooker
     def fql_query(query, format = 'XML')
       post('facebook.fql.query', :query => query, :format => format) do |response|
         type = response.shift
-        return [] if type.nil?
-        response.shift.map do |hash|
-          case type
-          when 'user'
-            user = User.new
-            user.session = self
-            user.populate_from_hash!(hash)
-            user
-          when 'photo'
-            Photo.from_hash(hash)
-          when 'event_member'
-            Event::Attendance.from_hash(hash)
-          else
-            hash
+        if type.nil?
+          []
+        else
+          response.shift.map do |hash|
+            case type
+            when 'user'
+              user = User.new
+              user.session = self
+              user.populate_from_hash!(hash)
+              user
+            when 'photo'
+              Photo.from_hash(hash)
+            when 'event_member'
+              Event::Attendance.from_hash(hash)
+            else
+              hash
+            end
           end
         end
       end
