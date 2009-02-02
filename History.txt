@@ -1,5 +1,6 @@
 === x.x.x / 2009-xx-xx
 
+* Modified ensure_has_* and application_needs_permission methods in Controller to accept options which are to be encoded into the redirect URL (useful for setting next and next_cancel URLs) [Alan Larkin]
 * Fixed bug in fql_query when result set is empty [Alan Larkin]
 * Modified fql_query to return results as Hashes as a last resort [Alan Larkin]
 * fixed typo in set app properties parser [Andrew Grim, shane]

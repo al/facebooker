@@ -222,18 +222,21 @@ module Facebooker
         facebook_params['added']
       end
       
-      def ensure_has_status_update
-        has_extended_permission?("status_update") || application_needs_permission("status_update")
+      def ensure_has_status_update(options = {})
+        has_extended_permission?("status_update") || application_needs_permission("status_update", options)
       end
-      def ensure_has_photo_upload
-        has_extended_permission?("photo_upload") || application_needs_permission("photo_upload")
+      def ensure_has_photo_upload(options = {})
+        has_extended_permission?("photo_upload") || application_needs_permission("photo_upload", options)
       end
-      def ensure_has_create_listing
-        has_extended_permission?("create_listing") || application_needs_permission("create_listing")
+      def ensure_has_create_listing(options = {})
+        has_extended_permission?("create_listing") || application_needs_permission("create_listing", options)
+      end
+      def ensure_has_offline_access(options = {})
+        has_extended_permission?('offline_access') || application_needs_permission('offline_access', options)
       end
       
-      def application_needs_permission(perm)
-        redirect_to(facebook_session.permission_url(perm))
+      def application_needs_permission(perm, options = {})
+        redirect_to(facebook_session.permission_url(perm, options))
       end
       
       def has_extended_permission?(perm)
